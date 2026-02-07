@@ -53,7 +53,7 @@ const createArtist = async (req, res) => {
         const artist = await Artist.create(req.body)
 
         // Respond
-        res.status(200).json({
+        res.status(201).json({
             message: 'POST - root',
             metadata: {
                 hostname: req.hostname,

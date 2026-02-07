@@ -55,7 +55,7 @@ const createSong = async (req, res) => {
         const song = await Song.create(req.body)
 
         // Respond
-        res.status(200).json({
+        res.status(201).json({
             message: 'POST - root',
             metadata: {
                 hostname: req.hostname,

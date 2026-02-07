@@ -55,7 +55,7 @@ const createAlbum = async (req, res) => {
         const album = await Album.create(req.body)
 
         // Respond
-        res.status(200).json({
+        res.status(201).json({
             message: 'POST - root',
             metadata: {
                 hostname: req.hostname,
