@@ -1,0 +1,926 @@
+{
+  "info": {
+    "_postman_id": "42e62de3-0455-4e78-8bd0-4c3b4c51f4d4",
+    "name": "Music Database",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52187358",
+    "_collection_link": "https://go.postman.co/collection/52187358-42e62de3-0455-4e78-8bd0-4c3b4c51f4d4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "localhost:3000/artists",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"The Dave Brubeck Quartet\",\n  \"genre\": \"Jazz\",\n  \"bio\": \"The Dave Brubeck Quartet (est. 1951) was a premier \\\"West Coast Cool\\\" jazz group led by pianist Dave Brubeck. Famed for innovative, complex time signatures (e.g., \\\"Take Five\\\"), the group featured saxophonist Paul Desmond. Their 1959 album, Time Out, became the first jazz album to sell over a million copies.\",\n  \"listens\": 40483929\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/artists",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "artists"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/artists",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"The Dave Brubeck Quartej;alsdkjf;lasjdf;lajsdo;fhjaiosuhrvgiaushfv;oiauedhfv;oiadhjsfo;ivahjsio;dfhjaio;ushdjft\",\n  \"genre\": \"Jazz\",\n  \"bio\": \"The Dave Brubeck Quartet (est. 1951) was a premier \\\"West Coast Cool\\\" jazz group led by pianist Dave Brubeck. Famed for innovative, complex time signatures (e.g., \\\"Take Five\\\"), the group featured saxophonist Paul Desmond. Their 1959 album, Time Out, became the first jazz album to sell over a million copies.\",\n  \"listens\": 40483929\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/artists",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "artists"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/artists",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Paramore\",\n  \"genre\": \"Rock\",\n  \"bio\": \"Paramore is an American rock band formed in Franklin, Tennessee, in 2004, featuring lead vocalist Hayley Williams, drummer Zac Farro, and guitarist Taylor York. Known for hits like \\\"Misery Business\\\" and \\\"Still Into You,\\\" the Grammy-winning group has evolved from emo/pop-punk roots to new wave, releasing six studio albums including Riot! and This Is Why.\",\n  \"listens\": 4551473834\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/artists",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "artists"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/albums",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Newport 1958\",\n  \"artist\": \"6986e2693a98bf10b0d8d0b1\",\n  \"genre\": \"Jazz\",\n  \"runtime\": 49.1,\n  \"releaseYear\": 1958\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/albums",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "albums"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/albums",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Riot!\",\n  \"artist\": \"6986e5b8b6ee7e8a93c40a84\",\n  \"genre\": \"Rock\",\n  \"runtime\": 38.966,\n  \"releaseYear\": 2007\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/albums",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "albums"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/songs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Misery Business\",\n  \"artist\": \"6986e5b8b6ee7e8a93c40a84\",\n  \"album\": \"6986e67fb6ee7e8a93c40a86\",\n  \"duration\": 3.516,\n  \"genre\": \"Rock\",\n  \"trackNumber\": 4,\n  \"trackNumberOf\": 11\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/songs",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "songs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/songs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Things Ain't What They Used To Be\",\n  \"artist\": \"6986e2693a98bf10b0d8d0b1\",\n  \"album\": \"6986e28e3a98bf10b0d8d0b3\",\n  \"duration\": 6.9,\n  \"genre\": \"Jazz\",\n  \"trackNumber\": 1,\n  \"trackNumberOf\": 7\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/songs",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "songs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/songs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Jump For Joy\",\n  \"artist\": \"6986f28260f777755242bd52\",\n  \"album\": \"6986f2a360f777755242bd57\",\n  \"duration\": 5.25,\n  \"genre\": \"Jazz\",\n  \"trackNumber\": 2,\n  \"trackNumberOf\": 7\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/songs",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "songs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/songs/6986f2c660f777755242bd5d",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f28260f777755242bd52\",\n  \"album\": \"6986f2a360f777755242bd57\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/songs/6986f2c660f777755242bd5d",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "songs",
+            "6986f2c660f777755242bd5d"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/songs/6986f2b960f777755242bd5b",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f29660f777755242bd55\",\n  \"album\": \"6986f2b260f777755242bd59\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/songs/6986f2b960f777755242bd5b",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "songs",
+            "6986f2b960f777755242bd5b"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/albums/6986f2b260f777755242bd59",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f29660f777755242bd55\",\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/albums/6986f2b260f777755242bd59",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "albums",
+            "6986f2b260f777755242bd59"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/albums/6986f2a360f777755242bd57",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f28260f777755242bd52\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/albums/6986f2a360f777755242bd57",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "albums",
+            "6986f2a360f777755242bd57"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/artists",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f28260f777755242bd52\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/artists",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "artists"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/artists/6986f28260f777755242bd52",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f28260f777755242bd52\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/artists/6986f28260f777755242bd52",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "artists",
+            "6986f28260f777755242bd52"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/artists/6986f28260f777755242bd52/albums",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f28260f777755242bd52\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/artists/6986f28260f777755242bd52/albums",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "artists",
+            "6986f28260f777755242bd52",
+            "albums"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/songs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f28260f777755242bd52\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/songs",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "songs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/artists/6986f28260f777755242bd52/albums/6986f2a360f777755242bd57/songs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f28260f777755242bd52\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/artists/6986f28260f777755242bd52/albums/6986f2a360f777755242bd57/songs",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "artists",
+            "6986f28260f777755242bd52",
+            "albums",
+            "6986f2a360f777755242bd57",
+            "songs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/albums",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"artist\": \"6986f28260f777755242bd52\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/albums",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "albums"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/songs/6986f75c60f777755242bd75",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/songs/6986f75c60f777755242bd75",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "songs",
+            "6986f75c60f777755242bd75"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/albums/6986f74e60f777755242bd73",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/albums/6986f74e60f777755242bd73",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "albums",
+            "6986f74e60f777755242bd73"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "localhost:3000/artists/6986f74060f777755242bd6f",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/artists/6986f74060f777755242bd6f",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "artists",
+            "6986f74060f777755242bd6f"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
