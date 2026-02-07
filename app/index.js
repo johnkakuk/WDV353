@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
-const router = require('./routes')
+const connectDB = require('./db/config')
+
+connectDB();
 
 app.use(express.json())
 
@@ -15,6 +17,9 @@ app.get('/', (req, res) => {
     })
 })
 
-app.use("/users", router);
+// Added three shiny new routers
+app.use("/songs", require('./routes/songRouter'))
+app.use("/albums", require('./routes/albumRouter'))
+app.use("/artists", require('./routes/artistRouter'))
 
 module.exports = app

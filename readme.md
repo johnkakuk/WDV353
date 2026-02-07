@@ -10,3 +10,9 @@ Anyway, this is a Node assignment. It POST, it GET, it GET/PATCH/DELETE by ID. P
 
 See the demo here:
 https://www.loom.com/share/49cb1230c5284730882b9e18431d97b6
+
+Week 1: CRUD stuff & Jest tests
+Week 2: Mongo stuff. Demo video: https://www.loom.com/share/dade674ccb914d5a904bff07e6712fc9
+
+WEEK 2 additions:
+Created the beginnings of a music management database. Artists, albums and songs are present. Albums are related to artists, and songs are related to albums AND artists. Basic validation and error handling are present. ISSUE: Needs to throw an error and reject request if an object ID is used that doesn't already exist in the database. Pertains to adding albums and songs that relate to artists.
