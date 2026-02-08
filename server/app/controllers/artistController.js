@@ -1,34 +1,42 @@
 const Artist = require('../models/Artist')
+const messages = require('../messages/messages')
 
-const getAllArtists = async (req, res) => {
-    try {
-        const artists = await Artist.find({});
+// Done for proof of concept that I know how to work promise chains, but I prefer async/await for readability
+const getAllArtists = (req, res) => {
+    Artist.find({})
+        .select('-__v -createdAt -updatedAt')
+        .then(artists => {
+            if (!artists || artists.length === 0) {
+                return res.status(200).json({ message: messages.artist_not_found })
+            }
 
-        res.status(200).json({
-            message: 'GET - all artists',
-            metadata: {
-                hostname: req.hostname,
-                method: req.method,
-            },
-            result: artists
+            res.status(200).json({
+                message: messages.get_all_artists,
+                metadata: {
+                    hostname: req.hostname,
+                    method: req.method,
+                },
+                result: artists
+            })
+            
+            console.log('All artists found')
         })
-
-        console.log('All artists found')
-    } catch (error) {
-        return res.status(500).json({ message: error.message })
-    }
+        .catch(error => {
+            return res.status(500).json({ message: error.message })
+        })
 }
 
 const getArtistById = async (req,res) => {
     try {
         const artist = await Artist.findById(req.params.id)
+            .select('-__v -createdAt -updatedAt')
 
         if (!artist) {
-            return res.status(404).json({ message: 'Artist not found' })
+            return res.status(200).json({ message: messages.artist_not_found })
         }
 
         res.status(200).json({
-            message: `GET - artist with ID ${req.params.id}`,
+            message: messages.get_artist_by_id(req.params.id),
             metadata: {
                 hostname: req.hostname,
                 method: req.method,
@@ -48,18 +56,16 @@ const getArtistById = async (req,res) => {
 const createArtist = async (req, res) => {
     try {
         // Setup
-        const { data } = req.body
-
         const artist = await Artist.create(req.body)
 
         // Respond
         res.status(201).json({
-            message: 'POST - root',
+            message: messages.post_root,
             metadata: {
                 hostname: req.hostname,
                 method: req.method,
             },
-            data: artist
+            result: artist
         })
 
         console.log('Artist created successfully')
@@ -76,17 +82,17 @@ const updateArtist =  async (req, res) => {
         const artist = await Artist.findByIdAndUpdate(req.params.id, req.body, { new: true });
         
         if (!artist) {
-            return res.status(404).json({ message: 'Artist not found' })
+            return res.status(200).json({ message: messages.artist_not_found })
         }
 
         // Repond
         res.status(200).json({
-            message: `UPDATE - artist with ID ${req.params.id}`,
+            message: messages.update_artist_by_id(req.params.id),
             metadata: {
                 hostname: req.hostname,
                 method: req.method,
             },
-            result: `${artist.name} has been updated`
+            result: messages.resource_updated(artist.name)
         })
 
         console.log('Artist updated successfully')
@@ -104,17 +110,17 @@ const deleteArtist = async (req, res) => {
         const artist = await Artist.findByIdAndDelete(req.params.id)
             
         if (!artist) {
-            return res.status(404).json({ message: 'Artist not found' })
+            return res.status(200).json({ message: messages.artist_not_found })
         }
 
         // Respond
         res.status(200).json({
-            message: `DELETE - artist with ID ${req.params.id}`,
+            message: messages.delete_artist_by_id(req.params.id),
             metadata: {
                 hostname: req.hostname,
                 method: req.method,
             },
-            result: `${artist.name} has been deleted`
+            result: messages.resource_deleted(artist.name)
         })
 
         console.log('Artist deleted successfully')
