@@ -15,4 +15,7 @@ Week 1: CRUD stuff & Jest tests
 Week 2: Mongo stuff. Demo video: https://www.loom.com/share/dade674ccb914d5a904bff07e6712fc9
 
 WEEK 2 additions:
-Created the beginnings of a music management database. Artists, albums and songs are present. Albums are related to artists, and songs are related to albums AND artists. Basic validation and error handling are present. ISSUE: Needs to throw an error and reject request if an object ID is used that doesn't already exist in the database. Pertains to adding albums and songs that relate to artists.
+- Created the beginnings of a music management database. Artists, albums and songs are present. Albums are related to artists, and songs are related to albums AND artists. Basic validation and error handling are present.
+- ISSUE: Needs to throw an error and reject request if an object ID is used that doesn't already exist in the database. Pertains to adding albums and songs that relate to artists. UPDATE: Actually probably doesn't need this. Only reason the error happened is because I was manually writing requests. A well-behaved UI will probably get rid of this.
+- Split project into client and server side directories. Installed blank Vite/React instance in client.
+- Refactored controllers to be cleaner. Added .select() and .populate() functionality.
