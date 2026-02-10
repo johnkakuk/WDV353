@@ -1,41 +1,12 @@
 {
   "info": {
-    "_postman_id": "aa73efa9-a395-4556-8523-338a5ded9688",
+    "_postman_id": "2d831e8b-0702-4c77-85de-7fff44053bf6",
     "name": "Music Database Tests v2",
     "description": "Practical API integration tests for CRUD, filtering, operators, select, sort, pagination, nested routes, and common error paths.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "52187358"
+    "_exporter_id": "52187358",
+    "_collection_link": "https://go.postman.co/collection/52187358-2d831e8b-0702-4c77-85de-7fff44053bf6?source=collection_link"
   },
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:3000"
-    },
-    {
-      "key": "artistId",
-      "value": "64b000000000000000000001"
-    },
-    {
-      "key": "albumId",
-      "value": "64b100000000000000000001"
-    },
-    {
-      "key": "songId",
-      "value": "64b200000000000000000003"
-    },
-    {
-      "key": "artistName",
-      "value": "The Dave Brubeck Quartet"
-    },
-    {
-      "key": "albumName",
-      "value": "Time Out"
-    },
-    {
-      "key": "songName",
-      "value": "Take Five"
-    }
-  ],
   "item": [
     {
       "name": "01 Seed Data",
@@ -76,7 +47,15 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/artists"
+            "url": {
+              "raw": "{{baseUrl}}/artists",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists"
+              ]
+            }
           },
           "response": []
         },
@@ -116,7 +95,15 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/albums"
+            "url": {
+              "raw": "{{baseUrl}}/albums",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "albums"
+              ]
+            }
           },
           "response": []
         },
@@ -156,7 +143,15 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/songs"
+            "url": {
+              "raw": "{{baseUrl}}/songs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "songs"
+              ]
+            }
           },
           "response": []
         }
@@ -184,7 +179,16 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/artists/{{artistId}}"
+            "url": {
+              "raw": "{{baseUrl}}/artists/{{artistId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists",
+                "{{artistId}}"
+              ]
+            }
           },
           "response": []
         },
@@ -221,7 +225,16 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/artists/{{artistId}}"
+            "url": {
+              "raw": "{{baseUrl}}/artists/{{artistId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists",
+                "{{artistId}}"
+              ]
+            }
           },
           "response": []
         },
@@ -244,7 +257,16 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/albums/{{albumId}}"
+            "url": {
+              "raw": "{{baseUrl}}/albums/{{albumId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "albums",
+                "{{albumId}}"
+              ]
+            }
           },
           "response": []
         },
@@ -281,7 +303,16 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/albums/{{albumId}}"
+            "url": {
+              "raw": "{{baseUrl}}/albums/{{albumId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "albums",
+                "{{albumId}}"
+              ]
+            }
           },
           "response": []
         },
@@ -304,7 +335,16 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/songs/{{songId}}"
+            "url": {
+              "raw": "{{baseUrl}}/songs/{{songId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "songs",
+                "{{songId}}"
+              ]
+            }
           },
           "response": []
         },
@@ -341,7 +381,16 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/songs/{{songId}}"
+            "url": {
+              "raw": "{{baseUrl}}/songs/{{songId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "songs",
+                "{{songId}}"
+              ]
+            }
           },
           "response": []
         }
@@ -370,7 +419,41 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/artists?listens[gte]=1&listens[lte]=9999999999&fields=name,listens&sort=-listens&page=1&limit=5"
+            "url": {
+              "raw": "{{baseUrl}}/artists?listens[gte]=1&listens[lte]=9999999999&fields=name,listens&sort=-listens&page=1&limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists"
+              ],
+              "query": [
+                {
+                  "key": "listens[gte]",
+                  "value": "1"
+                },
+                {
+                  "key": "listens[lte]",
+                  "value": "9999999999"
+                },
+                {
+                  "key": "fields",
+                  "value": "name,listens"
+                },
+                {
+                  "key": "sort",
+                  "value": "-listens"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
           },
           "response": []
         },
@@ -394,7 +477,41 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/albums?runtime[gte]=1&runtime[lte]=500&fields=name,genre,releaseYear,artist&sort=-releaseYear&page=1&limit=5"
+            "url": {
+              "raw": "{{baseUrl}}/albums?runtime[gte]=1&runtime[lte]=500&fields=name,genre,releaseYear,artist&sort=-releaseYear&page=1&limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "albums"
+              ],
+              "query": [
+                {
+                  "key": "runtime[gte]",
+                  "value": "1"
+                },
+                {
+                  "key": "runtime[lte]",
+                  "value": "500"
+                },
+                {
+                  "key": "fields",
+                  "value": "name,genre,releaseYear,artist"
+                },
+                {
+                  "key": "sort",
+                  "value": "-releaseYear"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
           },
           "response": []
         },
@@ -418,7 +535,41 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/songs?duration[gte]=1&duration[lte]=30&fields=name,duration,artist,album&sort=-duration&page=1&limit=5"
+            "url": {
+              "raw": "{{baseUrl}}/songs?duration[gte]=1&duration[lte]=30&fields=name,duration,artist,album&sort=-duration&page=1&limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "songs"
+              ],
+              "query": [
+                {
+                  "key": "duration[gte]",
+                  "value": "1"
+                },
+                {
+                  "key": "duration[lte]",
+                  "value": "30"
+                },
+                {
+                  "key": "fields",
+                  "value": "name,duration,artist,album"
+                },
+                {
+                  "key": "sort",
+                  "value": "-duration"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
           },
           "response": []
         },
@@ -442,7 +593,39 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/artists/{{artistId}}/albums?releaseYear[gte]=1900&fields=name,releaseYear,artist&sort=-releaseYear&page=1&limit=5"
+            "url": {
+              "raw": "{{baseUrl}}/artists/{{artistId}}/albums?releaseYear[gte]=1900&fields=name,releaseYear,artist&sort=-releaseYear&page=1&limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists",
+                "{{artistId}}",
+                "albums"
+              ],
+              "query": [
+                {
+                  "key": "releaseYear[gte]",
+                  "value": "1900"
+                },
+                {
+                  "key": "fields",
+                  "value": "name,releaseYear,artist"
+                },
+                {
+                  "key": "sort",
+                  "value": "-releaseYear"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
           },
           "response": []
         },
@@ -466,7 +649,41 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/artists/{{artistId}}/albums/{{albumId}}/songs?trackNumber[gte]=1&fields=name,trackNumber,album&sort=trackNumber&page=1&limit=5"
+            "url": {
+              "raw": "{{baseUrl}}/artists/{{artistId}}/albums/{{albumId}}/songs?trackNumber[gte]=1&fields=name,trackNumber,album&sort=trackNumber&page=1&limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists",
+                "{{artistId}}",
+                "albums",
+                "{{albumId}}",
+                "songs"
+              ],
+              "query": [
+                {
+                  "key": "trackNumber[gte]",
+                  "value": "1"
+                },
+                {
+                  "key": "fields",
+                  "value": "name,trackNumber,album"
+                },
+                {
+                  "key": "sort",
+                  "value": "trackNumber"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
           },
           "response": []
         }
@@ -493,7 +710,16 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/artists/not-a-valid-object-id"
+            "url": {
+              "raw": "{{baseUrl}}/artists/not-a-valid-object-id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists",
+                "not-a-valid-object-id"
+              ]
+            }
           },
           "response": []
         },
@@ -507,7 +733,7 @@
                 "exec": [
                   "const json = pm.response.json();",
                   "pm.test('Status code is 400 for validation failure', function () { pm.response.to.have.status(400); });",
-                  "pm.test('Validation message mentions genre', function () { pm.expect(json).to.have.property('message'); pm.expect(json.message.toLowerCase()).to.include('genre'); });"
+                  "pm.test('Validation message mentions enum/genre', function () { pm.expect(json).to.have.property('message'); pm.expect(json.message.toLowerCase()).to.include('genre'); });"
                 ]
               }
             }
@@ -529,7 +755,15 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/albums"
+            "url": {
+              "raw": "{{baseUrl}}/albums",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "albums"
+              ]
+            }
           },
           "response": []
         },
@@ -551,7 +785,29 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/albums?genre=NoSuchGenreValue&page=1&limit=2"
+            "url": {
+              "raw": "{{baseUrl}}/albums?genre=NoSuchGenreValue&page=1&limit=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "albums"
+              ],
+              "query": [
+                {
+                  "key": "genre",
+                  "value": "NoSuchGenreValue"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            }
           },
           "response": []
         },
@@ -573,7 +829,29 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/songs?duration[gte]=9999&page=1&limit=2"
+            "url": {
+              "raw": "{{baseUrl}}/songs?duration[gte]=9999&page=1&limit=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "songs"
+              ],
+              "query": [
+                {
+                  "key": "duration[gte]",
+                  "value": "9999"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            }
           },
           "response": []
         }
@@ -601,7 +879,16 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "{{baseUrl}}/songs/{{songId}}"
+            "url": {
+              "raw": "{{baseUrl}}/songs/{{songId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "songs",
+                "{{songId}}"
+              ]
+            }
           },
           "response": []
         },
@@ -624,7 +911,16 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "{{baseUrl}}/albums/{{albumId}}"
+            "url": {
+              "raw": "{{baseUrl}}/albums/{{albumId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "albums",
+                "{{albumId}}"
+              ]
+            }
           },
           "response": []
         },
@@ -647,7 +943,16 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "{{baseUrl}}/artists/{{artistId}}"
+            "url": {
+              "raw": "{{baseUrl}}/artists/{{artistId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists",
+                "{{artistId}}"
+              ]
+            }
           },
           "response": []
         },
@@ -669,11 +974,50 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/artists/{{artistId}}"
+            "url": {
+              "raw": "{{baseUrl}}/artists/{{artistId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "artists",
+                "{{artistId}}"
+              ]
+            }
           },
           "response": []
         }
       ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "artistId",
+      "value": "64b000000000000000000001"
+    },
+    {
+      "key": "albumId",
+      "value": "64b100000000000000000001"
+    },
+    {
+      "key": "songId",
+      "value": "64b200000000000000000003"
+    },
+    {
+      "key": "artistName",
+      "value": "The Dave Brubeck Quartet"
+    },
+    {
+      "key": "albumName",
+      "value": "Time Out"
+    },
+    {
+      "key": "songName",
+      "value": "Take Five"
     }
   ]
 }
