@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const { getAllGeodata, getGeodataById, createGeodata, deleteGeodata, updateGeodata } = require('../controllers/geodataController')
 
+// Route map for geodata CRUD + weather lookup flow
+
 // GET all
 router.get('/', getAllGeodata)
 
