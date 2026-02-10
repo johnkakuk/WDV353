@@ -1,14 +1,41 @@
 const Song = require('../models/Song')
 const messages = require('../messages/messages')
 
+// For detailed explanations on query filtering/pagination/select/sort mechanics, see albumController comments.
 const getAllSongs = async (req, res) => {
     try {
-        // Added filter so users can get all songs or songs by album
-        const filter = req.params.albumId ? { album: req.params.albumId } : {}
-        const songs = await Song.find(filter)
-            .select('-__v -createdAt -updatedAt')
-            .populate({ path: 'artist', select: 'name _id'})
-            .populate({ path: 'album', select: 'name _id'})
+        // Query params. Separates pagination and sorting params from filter params. Also converts gt, gte, lt, lte, and in to their MongoDB equivalents with the $ prefix.
+        // Also BIG upgrade to filters. Can now use queries to filter by any field, not just album/artist. So you can do things like /songs?genre=Rock or /songs?duration[gte]=3. Very flexible!
+        const { page = 1, limit = 10, sort, fields, ...filter } = req.query
+        const skip = (parseInt(page) - 1) * parseInt(limit)
+        const parsedFilter = JSON.parse(JSON.stringify(filter).replace(/\b(gt|gte|lt|lte|in)\b/g, (match) => `$${match}`))
+
+        // Preserve nested route behavior: /artists/:artistId/albums/:albumId/songs
+        if (req.params.albumId) parsedFilter.album = req.params.albumId
+
+        // Do not want artist if 1. fields are specified, 2. No minuses are present, and 3. artist is NOT included
+        // OR if 1. fields are specified, 2, -artist is included. Christ what a headache
+        const projection = fields ? fields.split(',').join(' ') : '';
+        const doesNotWantArtist =
+            (projection && !projection.includes('-') && !projection.includes('artist')) ||
+            (projection && projection.includes('-artist'))
+        const doesNotWantAlbum =
+            (projection && !projection.includes('-') && !projection.includes('album')) ||
+            (projection && projection.includes('-album'))
+
+        let query = Song.find(parsedFilter)
+            .skip(skip)
+            .limit(parseInt(limit, 10))
+            .select(projection || '-__v -createdAt -updatedAt')
+
+        if (!doesNotWantArtist) query = query.populate({ path: 'artist', select: 'name _id' })
+        if (!doesNotWantAlbum) query = query.populate({ path: 'album', select: 'name _id' })
+
+        if (sort) {
+            query = query.sort(sort.split(',').join(' '))
+        }
+
+        const songs = await query
 
         if (!songs || songs.length === 0) {
             return res.status(200).json({ message: messages.song_not_found })

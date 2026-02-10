@@ -1,3 +1,4 @@
+// Database stuff
 const express = require('express')
 const app = express()
 const connectDB = require('./db/config')
@@ -5,7 +6,6 @@ const connectDB = require('./db/config')
 connectDB();
 
 app.use(express.json())
-app.set('query parser', 'extended') // Allows for nested query objects, which is necessary for the new filter systems. Was this covered in class or am i missing something else?
 
 // localhost:3000/
 app.get('/', (req, res) => {
@@ -18,9 +18,6 @@ app.get('/', (req, res) => {
     })
 })
 
-// Added three shiny new routers
-app.use("/songs", require('./routes/songRouter'))
-app.use("/albums", require('./routes/albumRouter'))
-app.use("/artists", require('./routes/artistRouter'))
+app.use("/geo-data", require('./routes/geodataRouter'))
 
 module.exports = app

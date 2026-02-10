@@ -1,29 +1,44 @@
 const Artist = require('../models/Artist')
 const messages = require('../messages/messages')
 
-// Done for proof of concept that I know how to work promise chains, but I prefer async/await for readability
-const getAllArtists = (req, res) => {
-    Artist.find({})
-        .select('-__v -createdAt -updatedAt')
-        .then(artists => {
-            if (!artists || artists.length === 0) {
-                return res.status(200).json({ message: messages.artist_not_found })
-            }
+// For detailed explanations on query filtering/pagination/select/sort mechanics, see albumController comments.
+const getAllArtists = async (req, res) => {
+    try {
+        // Query params. Separates pagination and sorting params from filter params. Also converts gt, gte, lt, lte, and in to their MongoDB equivalents with the $ prefix.
+        // Also BIG upgrade to filters. Can now use queries to filter by any field, not just name/genre. So you can do things like /artists?genre=Rock or /artists?listens[gte]=1000000. Very flexible!
+        const { page = 1, limit = 10, sort, fields, ...filter } = req.query
+        const skip = (parseInt(page) - 1) * parseInt(limit)
+        const parsedFilter = JSON.parse(JSON.stringify(filter).replace(/\b(gt|gte|lt|lte|in)\b/g, (match) => `$${match}`))
+        const projection = fields ? fields.split(',').join(' ') : '';
 
-            res.status(200).json({
-                message: messages.get_all_artists,
-                metadata: {
-                    hostname: req.hostname,
-                    method: req.method,
-                },
-                result: artists
-            })
-            
-            console.log('All artists found')
+        let query = Artist.find(parsedFilter)
+            .skip(skip)
+            .limit(parseInt(limit, 10))
+            .select(projection || '-__v -createdAt -updatedAt')
+
+        if (sort) {
+            query = query.sort(sort.split(',').join(' '))
+        }
+
+        const artists = await query
+
+        if (!artists || artists.length === 0) {
+            return res.status(200).json({ message: messages.artist_not_found })
+        }
+
+        res.status(200).json({
+            message: messages.get_all_artists,
+            metadata: {
+                hostname: req.hostname,
+                method: req.method,
+            },
+            result: artists
         })
-        .catch(error => {
-            return res.status(500).json({ message: error.message })
-        })
+
+        console.log('All artists found')
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 }
 
 const getArtistById = async (req,res) => {
