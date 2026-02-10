@@ -8,6 +8,9 @@ const getAllAlbums = async (req, res) => {
         const { page = 1, limit = 10, sort, fields, ...filter } = req.query
         const skip = (parseInt(page) - 1) * parseInt(limit)  
         const parsedFilter = JSON.parse(JSON.stringify(filter).replace(/\b(gt|gte|lt|lte|in)\b/g, (match) => `$${match}`))
+
+        // Preserve nested route behavior: /artists/:artistId/albums
+        if (req.params.artistId) parsedFilter.artist = req.params.artistId
     
         // Do not want artist if 1. fields are specified, 2. No minuses are present, and 3. artist is NOT included
         // OR if 1. fields are specified, 2, -artist is included. Christ what a headache

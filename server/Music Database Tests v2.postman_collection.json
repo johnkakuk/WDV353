@@ -1,0 +1,679 @@
+{
+  "info": {
+    "_postman_id": "aa73efa9-a395-4556-8523-338a5ded9688",
+    "name": "Music Database Tests v2",
+    "description": "Practical API integration tests for CRUD, filtering, operators, select, sort, pagination, nested routes, and common error paths.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52187358"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "artistId",
+      "value": "64b000000000000000000001"
+    },
+    {
+      "key": "albumId",
+      "value": "64b100000000000000000001"
+    },
+    {
+      "key": "songId",
+      "value": "64b200000000000000000003"
+    },
+    {
+      "key": "artistName",
+      "value": "The Dave Brubeck Quartet"
+    },
+    {
+      "key": "albumName",
+      "value": "Time Out"
+    },
+    {
+      "key": "songName",
+      "value": "Take Five"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Seed Data",
+      "item": [
+        {
+          "name": "POST /artists",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Response contains result object', function () { pm.expect(json).to.have.property('result'); pm.expect(json.result).to.be.an('object'); });",
+                  "pm.test('Artist id is valid ObjectId format', function () { pm.expect(json.result._id).to.be.a('string').and.to.have.lengthOf(24); });",
+                  "pm.test('Artist has expected core fields', function () { pm.expect(json.result).to.include.keys('_id','name','genre','bio','listens'); });",
+                  "pm.collectionVariables.set('artistId', json.result._id);",
+                  "pm.collectionVariables.set('artistName', json.result.name);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"API Test Artist {{$timestamp}}\",\n  \"genre\": \"Rock\",\n  \"bio\": \"Artist created by Postman integration tests.\",\n  \"listens\": 123456\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/artists"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /albums",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Response contains result object', function () { pm.expect(json).to.have.property('result'); pm.expect(json.result).to.be.an('object'); });",
+                  "pm.test('Album id is valid ObjectId format', function () { pm.expect(json.result._id).to.be.a('string').and.to.have.lengthOf(24); });",
+                  "pm.test('Album points to created artist', function () { pm.expect(json.result.artist).to.eql(pm.collectionVariables.get('artistId')); });",
+                  "pm.collectionVariables.set('albumId', json.result._id);",
+                  "pm.collectionVariables.set('albumName', json.result.name);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"API Test Album {{$timestamp}}\",\n  \"artist\": \"{{artistId}}\",\n  \"genre\": \"Rock\",\n  \"runtime\": 42.5,\n  \"releaseYear\": 2020\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/albums"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /songs",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Response contains result object', function () { pm.expect(json).to.have.property('result'); pm.expect(json.result).to.be.an('object'); });",
+                  "pm.test('Song id is valid ObjectId format', function () { pm.expect(json.result._id).to.be.a('string').and.to.have.lengthOf(24); });",
+                  "pm.test('Song points to created artist and album', function () { pm.expect(json.result.artist).to.eql(pm.collectionVariables.get('artistId')); pm.expect(json.result.album).to.eql(pm.collectionVariables.get('albumId')); });",
+                  "pm.collectionVariables.set('songId', json.result._id);",
+                  "pm.collectionVariables.set('songName', json.result.name);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"API Test Song {{$timestamp}}\",\n  \"artist\": \"{{artistId}}\",\n  \"album\": \"{{albumId}}\",\n  \"duration\": 3.7,\n  \"genre\": \"Rock\",\n  \"trackNumber\": 1,\n  \"trackNumberOf\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/songs"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 CRUD By ID",
+      "item": [
+        {
+          "name": "GET /artists/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Returns expected artist id', function () { pm.expect(json.result._id).to.eql(pm.collectionVariables.get('artistId')); });",
+                  "pm.test('Returns expected artist name', function () { pm.expect(json.result.name).to.eql(pm.collectionVariables.get('artistName')); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/artists/{{artistId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /artists/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response metadata confirms PATCH', function () { pm.expect(json.metadata.method).to.eql('PATCH'); });",
+                  "pm.test('Result confirms updated text', function () { pm.expect(json.result.toLowerCase()).to.include('updated'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"listens\": 777777\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/artists/{{artistId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /albums/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Returns expected album id', function () { pm.expect(json.result._id).to.eql(pm.collectionVariables.get('albumId')); });",
+                  "pm.test('Album is linked to created artist', function () { pm.expect(json.result.artist._id).to.eql(pm.collectionVariables.get('artistId')); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/albums/{{albumId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /albums/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response metadata confirms PATCH', function () { pm.expect(json.metadata.method).to.eql('PATCH'); });",
+                  "pm.test('Result confirms updated text', function () { pm.expect(json.result.toLowerCase()).to.include('updated'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"runtime\": 44.4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/albums/{{albumId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /songs/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Returns expected song id', function () { pm.expect(json.result._id).to.eql(pm.collectionVariables.get('songId')); });",
+                  "pm.test('Song is linked to created artist and album', function () { pm.expect(json.result.artist._id).to.eql(pm.collectionVariables.get('artistId')); pm.expect(json.result.album._id).to.eql(pm.collectionVariables.get('albumId')); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/songs/{{songId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /songs/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response metadata confirms PATCH', function () { pm.expect(json.metadata.method).to.eql('PATCH'); });",
+                  "pm.test('Result confirms updated text', function () { pm.expect(json.result.toLowerCase()).to.include('updated'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"duration\": 4.2,\n  \"trackNumber\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/songs/{{songId}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 Query Features",
+      "item": [
+        {
+          "name": "GET /artists with operators+select+sort+pagination",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Result is an array with pagination applied', function () { pm.expect(json.result).to.be.an('array'); pm.expect(json.result.length).to.be.at.most(5); });",
+                  "pm.test('Artist select projection is respected', function () { json.result.forEach(a => pm.expect(a).to.have.all.keys('_id','name','listens')); });",
+                  "pm.test('Sorted by listens desc when multiple rows', function () { if (json.result.length > 1) { for (let i = 1; i < json.result.length; i++) { pm.expect(json.result[i-1].listens).to.be.at.least(json.result[i].listens); } } });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/artists?listens[gte]=1&listens[lte]=9999999999&fields=name,listens&sort=-listens&page=1&limit=5"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /albums with operators+select+sort+pagination",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Result is an array with pagination applied', function () { pm.expect(json.result).to.be.an('array'); pm.expect(json.result.length).to.be.at.most(5); });",
+                  "pm.test('Album projection includes requested fields', function () { json.result.forEach(a => pm.expect(a).to.have.all.keys('_id','name','artist','genre','releaseYear')); });",
+                  "pm.test('Sorted by releaseYear desc when multiple rows', function () { if (json.result.length > 1) { for (let i = 1; i < json.result.length; i++) { pm.expect(json.result[i-1].releaseYear).to.be.at.least(json.result[i].releaseYear); } } });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/albums?runtime[gte]=1&runtime[lte]=500&fields=name,genre,releaseYear,artist&sort=-releaseYear&page=1&limit=5"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /songs with operators+select+sort+pagination",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Result is an array with pagination applied', function () { pm.expect(json.result).to.be.an('array'); pm.expect(json.result.length).to.be.at.most(5); });",
+                  "pm.test('Song projection includes requested fields', function () { json.result.forEach(s => pm.expect(s).to.have.all.keys('_id','name','artist','album','duration')); });",
+                  "pm.test('Sorted by duration desc when multiple rows', function () { if (json.result.length > 1) { for (let i = 1; i < json.result.length; i++) { pm.expect(json.result[i-1].duration).to.be.at.least(json.result[i].duration); } } });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/songs?duration[gte]=1&duration[lte]=30&fields=name,duration,artist,album&sort=-duration&page=1&limit=5"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /artists/:artistId/albums with query params",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Result is paginated array', function () { pm.expect(json.result).to.be.an('array'); pm.expect(json.result.length).to.be.at.most(5); });",
+                  "pm.test('All results belong to requested artist', function () { json.result.forEach(a => { const artistId = (a.artist && a.artist._id) ? a.artist._id : a.artist; pm.expect(artistId).to.eql(pm.collectionVariables.get('artistId')); }); });",
+                  "pm.test('Projection for nested albums is respected', function () { json.result.forEach(a => pm.expect(a).to.have.all.keys('_id','name','artist','releaseYear')); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/artists/{{artistId}}/albums?releaseYear[gte]=1900&fields=name,releaseYear,artist&sort=-releaseYear&page=1&limit=5"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /artists/:artistId/albums/:albumId/songs with query params",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Result is paginated array', function () { pm.expect(json.result).to.be.an('array'); pm.expect(json.result.length).to.be.at.most(5); });",
+                  "pm.test('All results belong to requested album', function () { json.result.forEach(s => { const albumId = (s.album && s.album._id) ? s.album._id : s.album; pm.expect(albumId).to.eql(pm.collectionVariables.get('albumId')); }); });",
+                  "pm.test('Sorted by trackNumber asc when multiple rows', function () { if (json.result.length > 1) { for (let i = 1; i < json.result.length; i++) { pm.expect(json.result[i-1].trackNumber).to.be.at.most(json.result[i].trackNumber); } } });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/artists/{{artistId}}/albums/{{albumId}}/songs?trackNumber[gte]=1&fields=name,trackNumber,album&sort=trackNumber&page=1&limit=5"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 Practical Edge Cases",
+      "item": [
+        {
+          "name": "GET /artists/:id with invalid ObjectId",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 400 for invalid id', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Error payload includes message', function () { pm.expect(json).to.have.property('message'); pm.expect(json.message).to.be.a('string').and.not.empty; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/artists/not-a-valid-object-id"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /albums validation error (invalid genre)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 400 for validation failure', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Validation message mentions genre', function () { pm.expect(json).to.have.property('message'); pm.expect(json.message.toLowerCase()).to.include('genre'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Invalid Genre Album {{$timestamp}}\",\n  \"artist\": \"{{artistId}}\",\n  \"genre\": \"Metalcore\",\n  \"runtime\": 30,\n  \"releaseYear\": 2019\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/albums"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /albums filter with no matches",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200 for empty result case', function () { pm.response.to.have.status(200); });",
+                  "pm.test('No-match response returns not found message', function () { pm.expect(json).to.have.property('message'); pm.expect(json.message.toLowerCase()).to.include('not found'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/albums?genre=NoSuchGenreValue&page=1&limit=2"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /songs filter with no matches",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200 for empty result case', function () { pm.response.to.have.status(200); });",
+                  "pm.test('No-match response returns not found message', function () { pm.expect(json).to.have.property('message'); pm.expect(json.message.toLowerCase()).to.include('not found'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/songs?duration[gte]=9999&page=1&limit=2"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 Teardown",
+      "item": [
+        {
+          "name": "DELETE /songs/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Delete metadata method is DELETE', function () { pm.expect(json.metadata.method).to.eql('DELETE'); });",
+                  "pm.test('Delete result confirms deletion', function () { pm.expect(json.result.toLowerCase()).to.include('deleted'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/songs/{{songId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /albums/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Delete metadata method is DELETE', function () { pm.expect(json.metadata.method).to.eql('DELETE'); });",
+                  "pm.test('Delete result confirms deletion', function () { pm.expect(json.result.toLowerCase()).to.include('deleted'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/albums/{{albumId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /artists/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Delete metadata method is DELETE', function () { pm.expect(json.metadata.method).to.eql('DELETE'); });",
+                  "pm.test('Delete result confirms deletion', function () { pm.expect(json.result.toLowerCase()).to.include('deleted'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/artists/{{artistId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /artists/:id after delete",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.test('Status code is 200 on not found response', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Resource is reported as not found', function () { pm.expect(json).to.have.property('message'); pm.expect(json.message.toLowerCase()).to.include('not found'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/artists/{{artistId}}"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

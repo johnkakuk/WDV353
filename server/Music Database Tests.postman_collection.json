@@ -699,15 +699,31 @@
   "variable": [
     {
       "key": "artistId",
-      "value": ""
+      "value": "64b000000000000000000001"
     },
     {
       "key": "albumId",
-      "value": ""
+      "value": "64b100000000000000000001"
     },
     {
       "key": "songId",
-      "value": ""
+      "value": "64b200000000000000000003"
+    },
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "artistName",
+      "value": "The Dave Brubeck Quartet"
+    },
+    {
+      "key": "albumName",
+      "value": "Time Out"
+    },
+    {
+      "key": "songName",
+      "value": "Take Five"
     }
   ]
 }
