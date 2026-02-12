@@ -1,0 +1,122 @@
+// Open mongosh and paste the following code to create a new database and collection, and insert some sample data. Not required to run Postman tests, but useful for testing pagination and other queries.
+
+use("2602-demo");
+
+const A1 = ObjectId("64b000000000000000000001"); // The Dave Brubeck Quartet
+const A2 = ObjectId("64b000000000000000000002"); // Paramore
+const A3 = ObjectId("64b000000000000000000003"); // Daft Punk
+
+const AL1 = ObjectId("64b100000000000000000001"); // Time Out
+const AL2 = ObjectId("64b100000000000000000002"); // Time Further Out
+const AL3 = ObjectId("64b100000000000000000003"); // Riot!
+const AL4 = ObjectId("64b100000000000000000004"); // Brand New Eyes
+const AL5 = ObjectId("64b100000000000000000005"); // Human After All
+const AL6 = ObjectId("64b100000000000000000006"); // Random Access Memories
+
+db.artists.insertMany([
+  {
+    _id: A1,
+    name: "The Dave Brubeck Quartet",
+    genre: "Jazz",
+    bio: "American jazz quartet led by Dave Brubeck.",
+    listens: 12000000
+  },
+  {
+    _id: A2,
+    name: "Paramore",
+    genre: "Rock",
+    bio: "American rock band formed in Franklin, Tennessee.",
+    listens: 4500000000
+  },
+  {
+    _id: A3,
+    name: "Daft Punk",
+    genre: "Electronic",
+    bio: "French electronic music duo.",
+    listens: 5200000000
+  }
+]);
+
+db.albums.insertMany([
+  { _id: AL1, name: "Time Out", artist: A1, genre: "Jazz", runtime: 38.5, releaseYear: 1959 },
+  { _id: AL2, name: "Time Further Out", artist: A1, genre: "Jazz", runtime: 37.02, releaseYear: 1961 },
+  { _id: AL3, name: "Riot!", artist: A2, genre: "Rock", runtime: 38.58, releaseYear: 2007 },
+  { _id: AL4, name: "Brand New Eyes", artist: A2, genre: "Rock", runtime: 40.14, releaseYear: 2009 },
+  { _id: AL5, name: "Human After All", artist: A3, genre: "Electronic", runtime: 45.38, releaseYear: 2005 },
+  { _id: AL6, name: "Random Access Memories", artist: A3, genre: "Electronic", runtime: 74.28, releaseYear: 2013 }
+]);
+
+db.songs.insertMany([
+  // Time Out (7)
+  { _id: ObjectId("64b200000000000000000001"), name: "Blue Rondo a la Turk", artist: A1, album: AL1, duration: 6.733, genre: "Jazz", trackNumber: 1, trackNumberOf: 7 },
+  { _id: ObjectId("64b200000000000000000002"), name: "Strange Meadow Lark", artist: A1, album: AL1, duration: 7.367, genre: "Jazz", trackNumber: 2, trackNumberOf: 7 },
+  { _id: ObjectId("64b200000000000000000003"), name: "Take Five", artist: A1, album: AL1, duration: 5.4, genre: "Jazz", trackNumber: 3, trackNumberOf: 7 },
+  { _id: ObjectId("64b200000000000000000004"), name: "Three to Get Ready", artist: A1, album: AL1, duration: 5.4, genre: "Jazz", trackNumber: 4, trackNumberOf: 7 },
+  { _id: ObjectId("64b200000000000000000005"), name: "Kathy's Waltz", artist: A1, album: AL1, duration: 4.8, genre: "Jazz", trackNumber: 5, trackNumberOf: 7 },
+  { _id: ObjectId("64b200000000000000000006"), name: "Everybody's Jumpin'", artist: A1, album: AL1, duration: 4.383, genre: "Jazz", trackNumber: 6, trackNumberOf: 7 },
+  { _id: ObjectId("64b200000000000000000007"), name: "Pick Up Sticks", artist: A1, album: AL1, duration: 4.267, genre: "Jazz", trackNumber: 7, trackNumberOf: 7 },
+
+  // Time Further Out (9)
+  { _id: ObjectId("64b200000000000000000008"), name: "It's a Raggy Waltz", artist: A1, album: AL2, duration: 5.2, genre: "Jazz", trackNumber: 1, trackNumberOf: 9 },
+  { _id: ObjectId("64b200000000000000000009"), name: "Bluette", artist: A1, album: AL2, duration: 5.35, genre: "Jazz", trackNumber: 2, trackNumberOf: 9 },
+  { _id: ObjectId("64b200000000000000000010"), name: "Charles Matthew Hallelujah", artist: A1, album: AL2, duration: 2.867, genre: "Jazz", trackNumber: 3, trackNumberOf: 9 },
+  { _id: ObjectId("64b200000000000000000011"), name: "Far More Blue", artist: A1, album: AL2, duration: 4.633, genre: "Jazz", trackNumber: 4, trackNumberOf: 9 },
+  { _id: ObjectId("64b200000000000000000012"), name: "Far More Drums", artist: A1, album: AL2, duration: 4, genre: "Jazz", trackNumber: 5, trackNumberOf: 9 },
+  { _id: ObjectId("64b200000000000000000013"), name: "Maori Blues", artist: A1, album: AL2, duration: 3.9, genre: "Jazz", trackNumber: 6, trackNumberOf: 9 },
+  { _id: ObjectId("64b200000000000000000014"), name: "Unsquare Dance", artist: A1, album: AL2, duration: 2, genre: "Jazz", trackNumber: 7, trackNumberOf: 9 },
+  { _id: ObjectId("64b200000000000000000015"), name: "Bru's Boogie Woogie", artist: A1, album: AL2, duration: 2.467, genre: "Jazz", trackNumber: 8, trackNumberOf: 9 },
+  { _id: ObjectId("64b200000000000000000016"), name: "Blue Shadows in the Street", artist: A1, album: AL2, duration: 6.583, genre: "Jazz", trackNumber: 9, trackNumberOf: 9 },
+
+  // Riot! (11)
+  { _id: ObjectId("64b200000000000000000017"), name: "For a Pessimist, I'm Pretty Optimistic", artist: A2, album: AL3, duration: 3.8, genre: "Rock", trackNumber: 1, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000018"), name: "That's What You Get", artist: A2, album: AL3, duration: 3.667, genre: "Rock", trackNumber: 2, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000019"), name: "Hallelujah", artist: A2, album: AL3, duration: 3.383, genre: "Rock", trackNumber: 3, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000020"), name: "Misery Business", artist: A2, album: AL3, duration: 3.517, genre: "Rock", trackNumber: 4, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000021"), name: "When It Rains", artist: A2, album: AL3, duration: 3.583, genre: "Rock", trackNumber: 5, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000022"), name: "Let the Flames Begin", artist: A2, album: AL3, duration: 3.3, genre: "Rock", trackNumber: 6, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000023"), name: "Miracle", artist: A2, album: AL3, duration: 3.483, genre: "Rock", trackNumber: 7, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000024"), name: "Crushcrushcrush", artist: A2, album: AL3, duration: 3.15, genre: "Rock", trackNumber: 8, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000025"), name: "We Are Broken", artist: A2, album: AL3, duration: 3.633, genre: "Rock", trackNumber: 9, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000026"), name: "Fences", artist: A2, album: AL3, duration: 3.3, genre: "Rock", trackNumber: 10, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000027"), name: "Born for This", artist: A2, album: AL3, duration: 3.967, genre: "Rock", trackNumber: 11, trackNumberOf: 11 },
+
+  // Brand New Eyes (11)
+  { _id: ObjectId("64b200000000000000000028"), name: "Careful", artist: A2, album: AL4, duration: 3.833, genre: "Rock", trackNumber: 1, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000029"), name: "Ignorance", artist: A2, album: AL4, duration: 3.65, genre: "Rock", trackNumber: 2, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000030"), name: "Playing God", artist: A2, album: AL4, duration: 3.05, genre: "Rock", trackNumber: 3, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000031"), name: "Brick by Boring Brick", artist: A2, album: AL4, duration: 4.233, genre: "Rock", trackNumber: 4, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000032"), name: "Turn It Off", artist: A2, album: AL4, duration: 4.333, genre: "Rock", trackNumber: 5, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000033"), name: "The Only Exception", artist: A2, album: AL4, duration: 4.467, genre: "Rock", trackNumber: 6, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000034"), name: "Feeling Sorry", artist: A2, album: AL4, duration: 3.083, genre: "Rock", trackNumber: 7, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000035"), name: "Looking Up", artist: A2, album: AL4, duration: 3.483, genre: "Rock", trackNumber: 8, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000036"), name: "Where the Lines Overlap", artist: A2, album: AL4, duration: 3.317, genre: "Rock", trackNumber: 9, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000037"), name: "Misguided Ghosts", artist: A2, album: AL4, duration: 3.033, genre: "Rock", trackNumber: 10, trackNumberOf: 11 },
+  { _id: ObjectId("64b200000000000000000038"), name: "All I Wanted", artist: A2, album: AL4, duration: 3.817, genre: "Rock", trackNumber: 11, trackNumberOf: 11 },
+
+  // Human After All (10)
+  { _id: ObjectId("64b200000000000000000039"), name: "Human After All", artist: A3, album: AL5, duration: 5.317, genre: "Electronic", trackNumber: 1, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000040"), name: "The Prime Time of Your Life", artist: A3, album: AL5, duration: 4.383, genre: "Electronic", trackNumber: 2, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000041"), name: "Robot Rock", artist: A3, album: AL5, duration: 4.783, genre: "Electronic", trackNumber: 3, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000042"), name: "Steam Machine", artist: A3, album: AL5, duration: 5.367, genre: "Electronic", trackNumber: 4, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000043"), name: "Make Love", artist: A3, album: AL5, duration: 4.8, genre: "Electronic", trackNumber: 5, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000044"), name: "The Brainwasher", artist: A3, album: AL5, duration: 4.133, genre: "Electronic", trackNumber: 6, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000045"), name: "On/Off", artist: A3, album: AL5, duration: 0.317, genre: "Electronic", trackNumber: 7, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000046"), name: "Television Rules the Nation", artist: A3, album: AL5, duration: 4.783, genre: "Electronic", trackNumber: 8, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000047"), name: "Technologic", artist: A3, album: AL5, duration: 4.733, genre: "Electronic", trackNumber: 9, trackNumberOf: 10 },
+  { _id: ObjectId("64b200000000000000000048"), name: "Emotion", artist: A3, album: AL5, duration: 6.95, genre: "Electronic", trackNumber: 10, trackNumberOf: 10 },
+
+  // Random Access Memories (13)
+  { _id: ObjectId("64b200000000000000000049"), name: "Give Life Back to Music", artist: A3, album: AL6, duration: 4.567, genre: "Electronic", trackNumber: 1, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000050"), name: "The Game of Love", artist: A3, album: AL6, duration: 5.35, genre: "Electronic", trackNumber: 2, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000051"), name: "Giorgio by Moroder", artist: A3, album: AL6, duration: 9.067, genre: "Electronic", trackNumber: 3, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000052"), name: "Within", artist: A3, album: AL6, duration: 3.8, genre: "Electronic", trackNumber: 4, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000053"), name: "Instant Crush", artist: A3, album: AL6, duration: 5.617, genre: "Electronic", trackNumber: 5, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000054"), name: "Lose Yourself to Dance", artist: A3, album: AL6, duration: 5.883, genre: "Electronic", trackNumber: 6, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000055"), name: "Touch", artist: A3, album: AL6, duration: 8.3, genre: "Electronic", trackNumber: 7, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000056"), name: "Get Lucky", artist: A3, album: AL6, duration: 6.117, genre: "Electronic", trackNumber: 8, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000057"), name: "Beyond", artist: A3, album: AL6, duration: 4.833, genre: "Electronic", trackNumber: 9, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000058"), name: "Motherboard", artist: A3, album: AL6, duration: 5.683, genre: "Electronic", trackNumber: 10, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000059"), name: "Fragments of Time", artist: A3, album: AL6, duration: 4.65, genre: "Electronic", trackNumber: 11, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000060"), name: "Doin' It Right", artist: A3, album: AL6, duration: 4.183, genre: "Electronic", trackNumber: 12, trackNumberOf: 13 },
+  { _id: ObjectId("64b200000000000000000061"), name: "Contact", artist: A3, album: AL6, duration: 6.35, genre: "Electronic", trackNumber: 13, trackNumberOf: 13 }
+]);

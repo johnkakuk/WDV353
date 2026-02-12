@@ -1,0 +1,223 @@
+:root {
+  font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #1f2937;
+  background-color: #f3f4f6;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: linear-gradient(180deg, #f9fafb 0%, #eef2f7 100%);
+}
+
+#root {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+nav {
+  margin-bottom: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin: 0;
+  background-color: #ffffff;
+  border: 1px solid #dbe2ea;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+}
+
+nav a {
+  text-decoration: none;
+  color: #0f172a;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  background-color: #f3f4f6;
+}
+
+main {
+  background-color: #ffffff;
+  border: 1px solid #dbe2ea;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.07);
+  text-align: left;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+form {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.75rem 0 1rem;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #f8fafc;
+}
+
+section.cards-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.archive-page {
+  text-align: left;
+}
+
+.card {
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  padding: 0.75rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.card h3 {
+  margin: 0 0 0.25rem;
+}
+
+.card p {
+  margin: 0.2rem 0;
+  color: #334155;
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.details-actions {
+  display: flex;
+  align-items: center;
+  gap: 0rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.details-actions a {
+  margin-left: 0.5rem;
+}
+
+.btn-delete {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.album-details-page {
+  text-align: left;
+}
+
+.artist-details-page,
+.song-details-page {
+  text-align: left;
+}
+
+.album-details-page .track-list,
+.artist-details-page .track-list {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.album-details-page .track-row,
+.artist-details-page .track-row {
+  margin-bottom: 0.5rem;
+}
+
+.album-details-page .track-item-content,
+.artist-details-page .track-item-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.25rem;
+}
+
+.add-form label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+}
+
+form label::first-letter {
+  text-transform: uppercase;
+}
+
+.add-form input,
+.add-form select {
+  max-width: 100%;
+}
+
+input,
+select {
+  width: 100%;
+  max-width: 380px;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+}
+
+button {
+  width: fit-content;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f1f5f9;
+}
+
+button + button {
+  margin-left: 0.5rem;
+}
+
+main ul,
+main ol {
+  padding-left: 1.2rem;
+}
+
+main li {
+  margin-bottom: 0.45rem;
+}
+
+.tracklist {
+  margin: 3rem 0 2rem 0;
+}

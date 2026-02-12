@@ -10,3 +10,20 @@ Anyway, this is a Node assignment. It POST, it GET, it GET/PATCH/DELETE by ID. P
 
 See the demo here:
 https://www.loom.com/share/49cb1230c5284730882b9e18431d97b6
+
+Week 1: CRUD stuff & Jest tests
+Week 2: Mongo stuff. Demo video: https://www.loom.com/share/dade674ccb914d5a904bff07e6712fc9
+
+Week 2 additions:
+- Created the beginnings of a music management database. Artists, albums and songs are present. Albums are related to artists, and songs are related to albums AND artists. Basic validation and error handling are present.
+- ISSUE: Needs to throw an error and reject request if an object ID is used that doesn't already exist in the database. Pertains to adding albums and songs that relate to artists. UPDATE: Actually probably doesn't need this. Only reason the error happened is because I was manually writing requests. A well-behaved UI will probably get rid of this.
+- Split project into client and server side directories. Installed blank Vite/React instance in client.
+- Refactored controllers to be cleaner. Added .select() and .populate() functionality.
+
+Week 3 additions:
+- Implemented URL parameters that support filter, sort, and pagination
+- Developed then splintered off geodata API app
+- Wrote new tests to support URL parameters
+
+Week 4 additions:
+- Created basic React front end to provide interface for API
