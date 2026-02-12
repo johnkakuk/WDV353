@@ -24,3 +24,6 @@ Week 3 additions:
 - Implemented URL parameters that support filter, sort, and pagination
 - Developed then splintered off geodata API app
 - Wrote new tests to support URL parameters
+
+Week 4 additions:
+- Created basic React front end to provide interface for API

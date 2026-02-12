@@ -9,6 +9,7 @@ const getAllSongs = async (req, res) => {
         const { page = 1, limit = 10, sort, fields, ...filter } = req.query
         const skip = (parseInt(page) - 1) * parseInt(limit)
         const parsedFilter = JSON.parse(JSON.stringify(filter).replace(/\b(gt|gte|lt|lte|in)\b/g, (match) => `$${match}`))
+        const total = await Song.countDocuments(parsedFilter)
 
         // Preserve nested route behavior: /artists/:artistId/albums/:albumId/songs
         if (req.params.albumId) parsedFilter.album = req.params.albumId
@@ -46,6 +47,7 @@ const getAllSongs = async (req, res) => {
             metadata: {
                 hostname: req.hostname,
                 method: req.method,
+                total: total,
             },
             result: songs
         })

@@ -1,5 +1,7 @@
 const Artist = require('../models/Artist')
 const messages = require('../messages/messages')
+const Album = require('../models/Album')
+const Song = require('../models/Song')
 
 // For detailed explanations on query filtering/pagination/select/sort mechanics, see albumController comments.
 const getAllArtists = async (req, res) => {
@@ -10,6 +12,7 @@ const getAllArtists = async (req, res) => {
         const skip = (parseInt(page) - 1) * parseInt(limit)
         const parsedFilter = JSON.parse(JSON.stringify(filter).replace(/\b(gt|gte|lt|lte|in)\b/g, (match) => `$${match}`))
         const projection = fields ? fields.split(',').join(' ') : '';
+        const total = await Artist.countDocuments(parsedFilter)
 
         let query = Artist.find(parsedFilter)
             .skip(skip)
@@ -31,6 +34,7 @@ const getAllArtists = async (req, res) => {
             metadata: {
                 hostname: req.hostname,
                 method: req.method,
+                total: total,
             },
             result: artists
         })
@@ -121,7 +125,9 @@ const updateArtist =  async (req, res) => {
 
 const deleteArtist = async (req, res) => {
     try {
-        // Setup
+        // Execute
+        await Song.deleteMany({ artist: req.params.id }) // Delete all songs with this artist ID first to prevent orphaned songs
+        await Album.deleteMany({ artist: req.params.id }) // Delete all albums with this artist ID first to prevent orphaned albums
         const artist = await Artist.findByIdAndDelete(req.params.id)
             
         if (!artist) {

@@ -1,4 +1,5 @@
 const Album = require('../models/Album')
+const Song = require('../models/Song')
 const messages = require('../messages/messages')
 
 const getAllAlbums = async (req, res) => {
@@ -11,7 +12,8 @@ const getAllAlbums = async (req, res) => {
 
         // Preserve nested route behavior: /artists/:artistId/albums
         if (req.params.artistId) parsedFilter.artist = req.params.artistId
-    
+        const total = await Album.countDocuments(parsedFilter)
+
         // Do not want artist if 1. fields are specified, 2. No minuses are present, and 3. artist is NOT included
         // OR if 1. fields are specified, 2, -artist is included. Christ what a headache
         const projection = fields ? fields.split(',').join(' ') : '';
@@ -41,6 +43,7 @@ const getAllAlbums = async (req, res) => {
             metadata: {
                 hostname: req.hostname,
                 method: req.method,
+                total: total,
             },
             result: albums
         })
@@ -132,7 +135,8 @@ const updateAlbum =  async (req, res) => {
 
 const deleteAlbum = async (req, res) => {
     try {
-        // Setup
+        // Execute
+        await Song.deleteMany({ album: req.params.id }) // Delete all songs with this album ID first to prevent orphaned songs
         const album = await Album.findByIdAndDelete(req.params.id)
             
         if (!album) {
